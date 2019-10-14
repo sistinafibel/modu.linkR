@@ -49,8 +49,3 @@ app.set('port', port);
 
 핵심 기능 위주로 구현한 상태로 업데이트 될때마다 깃 기록에 정리해둘 예정입니다.
 이 서비스를 정상적으로 사용하기에는 쪼까 무리가 있으나 필요한건 다 됩니다. 
-
-
-
-<img src="https://user-images.githubusercontent.com/36251104/61592932-4779d180-ac14-11e9-95c7-a62f0d0fcc1e.jpg" width="300px"/>
-<img src="https://user-images.githubusercontent.com/36251104/61592911-08e41700-ac14-11e9-8f76-b58c1da3abde.jpg" width="300px"/>
