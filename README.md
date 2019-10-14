@@ -2,7 +2,7 @@
 
 # modu.link
 ![q111](https://user-images.githubusercontent.com/36251104/66768705-30364180-eeee-11e9-9f3b-95658dae9d9d.gif)
-모든 URL을 단축URL로 만들어주는 귀여운 서비스.<br>
+<br>모든 URL을 단축URL로 만들어주는 귀여운 서비스.<br>
 기~~~~인 URL은 싫지만 그렇다고 상용 단축URL은 쓰고싶지 않은 사람에게 적극 추천합니다.
 
 ### 바로 서비스 사용해보기
@@ -16,8 +16,8 @@
 ```
 # 정상적으로 입력하셨을시 다음과 같은 내용으로 입력됩니다.
 #.env
-SERVER_URL=modu.link
-DB_HOST=서비스할 도메인명
+SERVER_URL=서비스할 도메인명
+DB_HOST= 디비 아이피
 DB_USER=디비 아이디
 DB_PASSWORD=디비 패스워드
 DB_PORT=디비 포트
