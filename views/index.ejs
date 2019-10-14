@@ -49,8 +49,8 @@
 			<b>상황에 따라 서비스가 중지되거나, 데이터가 유실 될 수 있다는 점에서 주의해서 이용해주세요.</b> <br><br>
 			서비스에 궁금한점이 생겼나요?
 			<ul>
-				<li>[Github] <a href="https://github.com/sistinafibel/simpleURL">https://github.com/sistinafibel/simpleURL</a></li>
-				<li>[기능 추가 / 버그] <a href="https://github.com/sistinafibel/simpleURL/issues">https://github.com/sistinafibel/simpleURL/issues</a></li>
+				<li>[Github] <a href="https://github.com/sistinafibel/modu.link">https://github.com/sistinafibel/modu.link</a></li>
+				<li>[기능 추가 / 버그] <a href="https://github.com/sistinafibel/modu.link/issues">https://github.com/sistinafibel/modu.link/issues</a></li>
 				<li>[개발자 이메일] sistinafibel@naver.com</li>
 			</ul>
 		</div>
@@ -98,8 +98,8 @@ function addUrl(){
 				$('#disport').hide();
 				let htmlSet = `<div class="card" style="margin-top: 1em; margin-bottom: 1em;">
 								<div class="card-body">
-									<h4>${json.url}</h4>
-									새로운 단축 주소는 : <b> http://${json.serviceUrl}/${json.return_url} </b> 입니다.
+									<h4>http://${json.serviceUrl}/${json.return_url} </h4>
+									이전 URL 주소는 : <b> ${json.url} </b> 입니다.
 								</div>
 							</div>`;
 				
