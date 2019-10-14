@@ -1,0 +1,25 @@
+<%= page.totalPage %> // <%= page.totalSet %> //<%= page.curSet %> // <%= page.startPage %> // <%= page.curPage %> // <%=page.endPage %> //<%=page.page_size%>
+<%
+let curPage = parseInt(page.curPage);
+%>
+<ul class="pagination" style="justify-content: center;">
+    <li class="page-item">
+        <a class="page-link" href="/admin/1">&laquo;</a>
+    </li>		
+    <li class="page-item">
+        <a class="page-link" href="/admin/<%=curPage-1%>">&lt;</a>
+    </li>
+    <% for(var i=page.startPage; i<=page.endPage; i++){ 
+    if(i > page.totalPage){break;} %>
+        <li class="page-item <% if(i ==  page.curPage){%> active <%}%>">
+            <a class="page-link" href="/admin/<%=i %>"><%=i %></a>
+        </li>
+    <% } %>
+
+    <li class="page-item">
+        <a class="page-link" href="/admin/<%=curPage+1%>">&gt;</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link" href="/admin/<%=page.totalPage%>">&raquo;</a>
+    </li>
+</ul>

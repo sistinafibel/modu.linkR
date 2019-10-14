@@ -1,0 +1,131 @@
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+body {
+    font: 400 14.5px/1.5 "Noto Sans KR", sans-serif !important;
+    font-feature-settings: "kern" 1 !important;
+    font-kerning: normal !important;
+    color: #292929 !important;
+    background-color: #f4f4f4;
+
+}
+@media (min-width: 992px) {
+    .mainset{
+        padding-left: 0px;
+    }
+}
+.jeju{
+    font-family: 'Jeju Gothic', serif;
+}
+
+.card {
+    margin-top: 1em; margin-bottom: 1em;
+}
+
+.comment{
+    background-color :#e9ecef; 
+    padding-bottom: 5px; 
+    padding-top: 5px; 
+    margin-bottom: 5px;
+    margin-top: 25px;
+}
+
+.notoanskr { /** 폰트 영문 이름 지정 **/
+    font: 400 14.5px/1.5 "Noto Sans KR", sans-serif;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+    color: #292929;
+}
+
+.ul-fontset > li{
+    font-family: 'Jeju Gothic', serif;
+    font-size: 15px;
+}
+
+.head-user , .head-user > a {
+    color:white;
+    font-size: 15px;
+    font-family: 'Jeju Gothic', serif;
+}
+
+
+/***** main *****/
+.hero-section{
+    background-color: #41A4F5;
+}
+
+.hero-section .col-12{
+    padding-bottom: 3rem !important; 
+    padding-top: 3rem !important;
+    color: white;
+}
+
+.main-contents{
+    padding-top:1em;
+}
+
+.menutitle{
+    text-align: center; 
+    background-color: #565d71; 
+    font-size: 30px; 
+    color: white;
+}
+
+.col-md-3 .list-group{
+    font-size: 15px;
+}
+
+#search_from .card{
+    margin-bottom: 10px;
+}
+
+#search_from .input-group {
+    height: 43px;
+    margin-bottom : 0px;
+}
+
+#search_from .input-group span > input{
+    border-radius : 0.5em; 
+    height: 43px; 
+    width:85px; 
+    margin-left: 10px;
+}
+
+.fixed-table-body {
+    overflow-x: auto;
+}
+
+.board{
+    margin-bottom: 10px; 
+}
+.board > .card-body{
+    overflow-x: auto;
+}
+
+.board table{
+    text-align: center; 
+    width: 798px;
+    font-size: 14px;
+}
+
+.board-botton{
+    padding-bottom: 100px;
+    text-align: right !important;
+}
+
+.board-botton  a{
+    border-radius : 0.5em;
+}
+
+
+/****푸터*****/
+#footer {
+    background-color: #434E5E;
+}
+
+#footer .container{
+    font-size: 14px; 
+    padding: 20px 10px; 
+    color:#FFFFFF;
+}
+

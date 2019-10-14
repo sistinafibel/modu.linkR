@@ -1,0 +1,51 @@
+<!-- 왼쪽 메뉴칸 시작-->
+<!-- Jeju 체로 일괄 적용 -->
+<div class="col-md-3 jeju">
+	<div class="card mb-3">
+		<!-- <img style="height: 50%; width: auto; display: block;" src="img/server_on.png" alt="Card image"> -->
+		<!-- #BDBDBD -->
+		<div class="card-body" style="text-align: center; background-color: #565d71; font-size: 30px; color: white;">
+			<?=$sidetitle ?>
+		</div>
+	</div>
+	
+	<!-- 자유게시판 메뉴 리스트 -->
+	<?php if($title == "community"){ ?>
+		<div class="list-group">
+			<a href="/board.php" class="list-group-item list-group-item-action <?php if($side == null){echo "active";} ?>">- 전체보기</a>
+			<a href="/board.php?side=1" class="list-group-item list-group-item-action <?php if($side == '1'){echo "active";} ?>">- 게임게시판</a>
+			<a href="/board.php?side=2" class="list-group-item list-group-item-action <?php if($side == '2'){echo "active";} ?>">- 일상게시판</a>
+			<a href="/board.php?side=3" class="list-group-item list-group-item-action <?php if($side == '3'){echo "active";} ?>">- 토론게시판</a>
+		</div>
+	<?php } ?>
+
+	<!-- 공지게시판 메뉴 리스트 -->
+	<?php if($title == "notice"){ ?>
+		<div class="list-group">
+			<a href="/notice.php" class="list-group-item list-group-item-action <?php if($side == null){echo "active";} ?>">- 전체보기</a>
+			<a href="/notice.php?side=1" class="list-group-item list-group-item-action <?php if($side == '1'){echo "active";} ?>">- 공지사항</a>
+			<a href="/notice.php?side=2" class="list-group-item list-group-item-action <?php if($side == '2'){echo "active";} ?>">- 업데이트 안내</a>
+			<a href="/notice.php?side=3" class="list-group-item list-group-item-action <?php if($side == '3'){echo "active";} ?>">- 패치 안내</a>
+			<a href="/notice.php?side=4" class="list-group-item list-group-item-action <?php if($side == '4'){echo "active";} ?>">- 긴급 안내</a>
+		</div>
+	<?php } ?>
+
+	<?php if($title == "webshop"){ ?>
+		<div class="list-group">
+			<a href="/webshop.php" class="list-group-item list-group-item-action <?php if($side == null){echo "active";} ?>">- 전체보기</a>
+			<a href="/webshop.php?side=1" class="list-group-item list-group-item-action <?php if($side == 'general'){echo "active";} ?>">- 일반상품</a>
+			<a href="/webshop.php?side=2" class="list-group-item list-group-item-action <?php if($side == 'package'){echo "active";} ?>">- 패키지상품</a>
+		</div>
+	<?php } ?>
+
+
+	<div class="card" style="margin-top:1em; height: 100px;">
+		AD 영역
+	</div>
+
+	<div class="card" style="margin-top:1em; height: 100px;">
+		AD 영역
+	</div>
+
+</div>
+<!--왼쪽 메뉴칸 끝-->
