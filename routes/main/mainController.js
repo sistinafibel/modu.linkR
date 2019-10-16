@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
  * 축소된 파라미터로 다른 페이지로 리다이렉트 시킵니다.
  */
 router.get('/:url', async function(req, res, next) {
-    sqlArray = [ req.params.url ];
+    sqlArray = [ encodeURI(req.params.url) ];
     let getUrlInf =  await mainDao.getUrlInf(sqlArray);
 
     if(commons.isEmpty(getUrlInf)){
@@ -39,12 +39,15 @@ router.get('/:url', async function(req, res, next) {
  * 단축 URL을 생성합니다.
  */
 router.post('/addUrlGeneration', async function(req, res, next) {
+
+    let userUrl = encodeURI(req.body.userUrl);
     let regex = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
-    if(!regex.test(req.body.userUrl)){
+    if(!regex.test(userUrl)){
         resJson("600" , "URL주소가 아닙니다.");
     }
 
     let sqlValue = {};
+
 
     /* 
     
@@ -63,7 +66,7 @@ router.post('/addUrlGeneration', async function(req, res, next) {
     let retrun_url = makeid();
 
     sqlValue = {
-        url : req.body.userUrl,
+        url : userUrl,
         urltype : req.body.sslSet,
         return_url : retrun_url,
         domain : req.body.domainSet,
@@ -78,7 +81,7 @@ router.post('/addUrlGeneration', async function(req, res, next) {
     let jsonRrturn = {
         status : "200",
         text : "정상적으로 생성되었습니다.",
-        url : req.body.userUrl,
+        url : userUrl,
         urltype : req.body.sslSet,
         return_url : retrun_url,
         domain : req.body.domainSet,

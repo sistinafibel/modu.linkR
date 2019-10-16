@@ -56,7 +56,7 @@ mainDao.getUrlCheck = function(param){
             }catch(e){
                 console.log(e);
             }finally{
-                connection.release();
+                pool.release();
             }
            
         });
@@ -86,7 +86,7 @@ mainDao.addUrlInf = function(param){
             }catch (e){
                 console.log(e);
             }finally{
-                connection.release();
+                pool.release();
             }
         });
     });
