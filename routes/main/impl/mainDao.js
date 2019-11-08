@@ -1,35 +1,23 @@
 let pool = require(__base+'routes/lib/db');
+const domain = require('domain');
 let mainDao = {};
-
 
 mainDao.getUrlInf = function(param){
     return new Promise(function (resolve, reject){
         let sql = "SELECT * FROM urllist WHERE 1=1 AND return_url = ?";
         let sqlValue = param;
-
-        console.log(param);
-
+        
         pool.getConnection(function(err, connection) {
-            try{
-                connection.query(sql, sqlValue, function(err, result, fields) {
-                    if (err) {
-                        console.log(err);
-                        reject(err.code);
-                    } else {
-                        console.log(result);
-                        resolve (result);
-                    }
-                });
-            }catch(e){
-                console.log(e);
-            }finally{
-                connection.release();
-            }
-           
+            connection.query(sql, sqlValue, function(err, result) {
+                if (err) { reject(new Error(err));} 
+                else {
+                    resolve (result);
+                }
+            });
+            connection.release();
         });
 
     });
-    
 };
 
 
@@ -43,22 +31,13 @@ mainDao.getUrlCheck = function(param){
         console.log(param);
 
         pool.getConnection(function(err, connection) {
-            try{
-                connection.query(sql, sqlValue, function(err, result, fields) {
-                    if (err) {
-                        console.log(err);
-                        reject(err.code);
-                    } else {
-                        console.log(result);
-                        resolve (result);
-                    }
-                });
-            }catch(e){
-                console.log(e);
-            }finally{
-                pool.release();
-            }
-           
+            connection.query(sql, sqlValue, function(err, result) {
+                if (err) { reject(new Error(err));} 
+                else {
+                    resolve (result);
+                }
+            });
+            connection.release();
         });
 
     });
@@ -73,26 +52,16 @@ mainDao.addUrlInf = function(param){
         let sqlValue = param;
        
         pool.getConnection(function(err, connection) {
-            try{
-                connection.query(sql, sqlValue, function(err, result, fields) {
-                    console.log("--------------------------------------");
-                    if (err) {
-                        console.log(err);
-                        reject(err.code);
-                    } else {
-                        resolve(result); // 콜백 시작
-                    }
-                })
-            }catch (e){
-                console.log(e);
-            }finally{
-                pool.release();
-            }
+            connection.query(sql, sqlValue, function(err, result) {
+                if (err) { reject(new Error(err));} 
+                else {
+                    resolve (result);
+                }
+            });
+            connection.release();
         });
     });
 }
-
-
 
 
 module.exports = mainDao;

@@ -21,17 +21,21 @@ router.get('/', function(req, res, next) {
  */
 router.get('/:url', async function(req, res, next) {
     sqlArray = [ encodeURI(req.params.url) ];
-    let getUrlInf =  await mainDao.getUrlInf(sqlArray);
 
-    if(commons.isEmpty(getUrlInf)){
-        res.render('black');
-        return 0;
+    try {
+        let getUrlInf = await mainDao.getUrlInf(sqlArray);
+
+        if(commons.isEmpty(getUrlInf)){
+            res.render('black');
+            return 0;
+        }
+
+        res.statusCode = 302;
+        res.setHeader('Location', getUrlInf[0].url);
+        res.end();
+    }catch (error) {
+        next(error);
     }
-    console.log(getUrlInf);
-    console.log(getUrlInf[0].url);
-    res.statusCode = 302;
-    res.setHeader('Location', getUrlInf[0].url);
-    res.end();
 });
 
 /**
@@ -43,69 +47,58 @@ router.post('/addUrlGeneration', async function(req, res, next) {
     let userUrl = encodeURI(req.body.userUrl);
     let regex = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
     if(!regex.test(userUrl)){
-        resJson("600" , "URL주소가 아닙니다.");
+        let jsonRrturn = {
+            status : 600,
+            text : "잘못된 도메인입니다."
+        }
+        res.json(jsonRrturn);
+        return 0;
     }
 
     let sqlValue = {};
 
+    try {
+        /* 
+        
+        한번 등록한 URL은 사용하지 않게 하려고 했으나, 이용자마다 통계 기능을 위해 주석처리.
+        let sqlArray = [];
+        sqlArray = [ req.body.userUrl, req.body.sslSet];
+        let urlCheck =  await mainDao.getUrlCheck(sqlArray);
+        if(!commons.isEmpty(urlCheck)){
+            resJson("600" , "이미 등록된 URL 주소입니다.");
+        }
+        */
 
-    /* 
-    
-    한번 등록한 URL은 사용하지 않게 하려고 했으나, 이용자마다 통계 기능을 위해 주석처리.
-    let sqlArray = [];
-    sqlArray = [ req.body.userUrl, req.body.sslSet];
-    let urlCheck =  await mainDao.getUrlCheck(sqlArray);
-    if(!commons.isEmpty(urlCheck)){
-        resJson("600" , "이미 등록된 URL 주소입니다.");
+        //이용자 아이피 정보 받아오기
+        const ip = req.headers['x-forwarded-for'] ||  req.connection.remoteAddress;
+        let retrun_url = makeid();
+
+        sqlValue = {
+            url : userUrl,
+            urltype : req.body.sslSet,
+            return_url : retrun_url,
+            domain : req.body.domainSet,
+            etcset : req.body.etcSet
+        };
+
+        await mainDao.addUrlInf(sqlValue);
+
+        let jsonRrturn = {
+            status : "200",
+            text : "정상적으로 생성되었습니다.",
+            url : userUrl,
+            urltype : req.body.sslSet,
+            return_url : retrun_url,
+            domain : req.body.domainSet,
+            etcset : req.body.etcSet,
+            serviceUrl : process.env.SERVER_URL
+        }
+
+        res.json(jsonRrturn);
+    }catch (error) {
+        next(error);
     }
-    */
-
-    //이용자 아이피 정보 받아오기
-    const ip = req.headers['x-forwarded-for'] ||  req.connection.remoteAddress;
-
-    let retrun_url = makeid();
-
-    sqlValue = {
-        url : userUrl,
-        urltype : req.body.sslSet,
-        return_url : retrun_url,
-        domain : req.body.domainSet,
-        etcset : req.body.etcSet
-    };
-
-    console.log(sqlValue);
-
-    let urlInf = await mainDao.addUrlInf(sqlValue);
-    console.log("------------------------------");
-
-    let jsonRrturn = {
-        status : "200",
-        text : "정상적으로 생성되었습니다.",
-        url : userUrl,
-        urltype : req.body.sslSet,
-        return_url : retrun_url,
-        domain : req.body.domainSet,
-        etcset : req.body.etcSet,
-        serviceUrl : process.env.SERVER_URL
-    }
-
-    res.json(jsonRrturn);
 });
-
-/**
- * res JSON 전용으로 오류 메세지용도로 공통화 처리
- * @param {*} statusCode 
- * @param {*} text 
- * 
- */
-function resJson(statusCode , text){
-    let jsonRrturn = {
-        status : statusCode,
-        text : text
-    }
-    res.json(jsonRrturn);
-    return 0;
-}
 
 /**
  * 7자리의 랜덤 String값을 전달합니다.

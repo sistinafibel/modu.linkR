@@ -24,10 +24,10 @@ DB_PORT=디비 포트
 DB_TABLE_NAME=디비 테이블명
 
 ```
-이후 bin/www 폴더에서  서비스 아이피를 변경합니다.
+이후 bin/www 폴더에서  서비스 포트번호를 변경합니다.
 ```
 # 15라인
-var port = normalizePort(process.env.PORT || '서비스아이피');
+const port = normalizePort(process.env.PORT || '서비스포트번호');
 app.set('port', port);
 
 ```
