@@ -8,6 +8,7 @@ mainDao.getUrlInf = function(param){
         let sqlValue = param;
         
         pool.getConnection(function(err, connection) {
+            if (err) {reject(new Error(err)); return 0;}
             connection.query(sql, sqlValue, function(err, result) {
                 if (err) { reject(new Error(err));} 
                 else {
@@ -31,6 +32,7 @@ mainDao.getUrlCheck = function(param){
         console.log(param);
 
         pool.getConnection(function(err, connection) {
+            if (err) {reject(new Error(err)); return 0;}
             connection.query(sql, sqlValue, function(err, result) {
                 if (err) { reject(new Error(err));} 
                 else {
@@ -52,6 +54,7 @@ mainDao.addUrlInf = function(param){
         let sqlValue = param;
        
         pool.getConnection(function(err, connection) {
+            if (err) {reject(new Error(err)); return 0;}
             connection.query(sql, sqlValue, function(err, result) {
                 if (err) { reject(new Error(err));} 
                 else {
