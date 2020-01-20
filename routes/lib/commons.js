@@ -1,7 +1,3 @@
-
-
-let client = require(__base+'routes/lib/db');
-
 module.exports = {
     /**
      * 공백&배열이 null 인지 체크합니다

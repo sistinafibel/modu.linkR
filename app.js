@@ -1,10 +1,10 @@
 global.__base = __dirname + '/'; //절대경로 확인용도 처리
 
-let createError = require('http-errors');
-let express = require('express');
-let path = require('path');
-let cookieParser = require('cookie-parser');
-let logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
 let compression = require('compression') //gzip 설정
 
