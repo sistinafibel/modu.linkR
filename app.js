@@ -9,7 +9,7 @@ const logger = require('morgan');
 let compression = require('compression') //gzip 설정
 
 //라우팅설정
-let indexRouter = require('./routes/main/mainController');
+let indexRouter = require('./routes/routes');
 
 let app = express();
 
