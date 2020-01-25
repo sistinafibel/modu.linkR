@@ -1,5 +1,3 @@
-const express = require('express');
-const router = express.Router();
 const commons = require(__base+'routes/lib/commons');
 const mainDao = require(__base+'routes/main/impl/mainDao'); //mainDao
 
