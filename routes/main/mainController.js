@@ -30,12 +30,10 @@ main.url = async (req,res,next)  => {
 
     try {
         let getUrlInf = await mainDao.getUrlInf(sqlArray);
-
         if(commons.isEmpty(getUrlInf)){
             res.render('black');
             return 0;
         }
-
         res.statusCode = 302;
         res.setHeader('Location', getUrlInf[0].url);
         res.end();
@@ -78,7 +76,7 @@ main.addUrlGeneration = async (req,res,next)  => {
 
         //이용자 아이피 정보 받아오기
         const ip = req.headers['x-forwarded-for'] ||  req.connection.remoteAddress;
-        let retrun_url = makeid();
+        let retrun_url = commons.randomId();
 
         sqlValue = {
             url : userUrl,
@@ -106,19 +104,4 @@ main.addUrlGeneration = async (req,res,next)  => {
         next(error);
     }
 };
-
-/**
- * 7자리의 랜덤 String값을 전달합니다.
- */
-function makeid()
-{
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for( var i=0; i < 7; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    return text;
-}
-
-
-
 module.exports = main;
