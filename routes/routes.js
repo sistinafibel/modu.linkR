@@ -7,7 +7,9 @@ require('dotenv').config();
 
 router.get('/', main.index);
 router.post('/addUrlGeneration', main.addUrlGeneration);
+router.get('/test' , main.test);
 router.get('/:url', main.url);
+
 
 
 module.exports = router;

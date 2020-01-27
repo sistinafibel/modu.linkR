@@ -12,11 +12,12 @@ require('dotenv').config();
 let main = {};
 
 main.index = (req,res,next) => {
-    res.render('index' , {serviceUrl : process.env.SERVER_URL});  
-    return 
+    res.render('index' , {serviceUrl : process.env.SERVER_URL});   
 };
 
-
+main.test =  (req,res,net) => {
+    res.render('time' , {serviceUrl : "https://naver.com"});
+};
 
 /**
  * GET
