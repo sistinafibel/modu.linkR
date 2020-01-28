@@ -1,5 +1,7 @@
 const commons = require(__base+'routes/lib/commons');
 const mainDao = require(__base+'routes/main/impl/mainDao'); //mainDao
+const QRCode = require('qrcode');
+
 
 require('dotenv').config();
 
@@ -15,10 +17,34 @@ main.index = (req,res,next) => {
     res.render('index' , {serviceUrl : process.env.SERVER_URL});   
 };
 
-main.test =  (req,res,net) => {
-    console.log("test-----")
+main.test = async (req,res,next) => {
+
+    let text = "https://naver.com";
+
+    QRCode.toFile(text,{type:'terminal'}, function (err, url) {
+        console.log(url)
+    })
     res.render('time' , {serviceUrl : "https://naver.com"});
 };
+
+
+main.image = async (req, res) => {
+    const inputText = `https://naver.com`;
+  
+    QRCode.toDataURL(inputText, (err, url) => {
+      const data = url.replace(/.*,/, "");
+      const img = new Buffer(data, "base64");
+  
+      res.writeHead(200, {
+        "Content-Type": "image/png",
+        "Content-Length": img.length
+      });
+  
+      res.end(img);
+    });
+};
+
+
 
 /**
  * GET
