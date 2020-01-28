@@ -40,9 +40,22 @@
 			<hr>
 			<div>
 				이동하는 페이지 주소가 맞는지 확인해주세요.<br>
-				5초뒤 이동합니다.
+				<span id="sitetime">5</span>초뒤 이동합니다.
 			</div>
 		</div>
 	</div>
 
 </div><!--//page-content-->   
+
+
+<script>
+
+let timeOut = setInterval(() =>{
+	let timeSeconds = document.getElementById('sitetime').innerHTML = Number(document.getElementById('sitetime').textContent) - 1;
+	if(timeSeconds <= 0){
+		clearInterval(timeOut);
+	}
+} , 1000);
+
+
+</script>
