@@ -35,7 +35,7 @@
 							<label for="exampleFormControlSelect1">기타설정</label>
 							<select class="form-control" id="etcSet" name="etcSet">
 								<option value="1">링크이동</option>
-								<!--<option value="2">5초뒤 이동</option>-->
+								<option value="2">5초뒤 이동</option>
 							</select>
 						</div>
 					</div>
@@ -98,7 +98,7 @@ function addUrl(){
 				$('#disport').hide();
 				let htmlSet = `<div class="card" style="margin-top: 1em; margin-bottom: 1em;">
 								<div class="card-body">
-									<h4>http://${json.serviceUrl}/${json.return_url} </h4>
+									<h4>${json.urltype}://${json.serviceUrl}/${json.return_url} </h4>
 									이전 URL 주소는 : <b> ${json.url} </b> 입니다.
 								</div>
 							</div>`;
