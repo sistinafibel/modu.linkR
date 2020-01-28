@@ -18,29 +18,21 @@ main.index = (req,res,next) => {
 };
 
 main.test = async (req,res,next) => {
-
-    let text = "https://naver.com";
-
-    QRCode.toFile(text,{type:'terminal'}, function (err, url) {
-        console.log(url)
-    })
     res.render('time' , {serviceUrl : "https://naver.com"});
 };
 
-
 main.image = async (req, res) => {
-    const inputText = `https://naver.com`;
+    let userUrl = `https://${process.env.SERVER_URL}/` + encodeURI(req.params.url);
+    QRCode.toDataURL(userUrl, (err, url) => {
+        const data = url.replace(/.*,/, "");
+        const img = new Buffer(data, "base64");
   
-    QRCode.toDataURL(inputText, (err, url) => {
-      const data = url.replace(/.*,/, "");
-      const img = new Buffer(data, "base64");
+        res.writeHead(200, {
+            "Content-Type": "image/png",
+            "Content-Length": img.length
+        });
   
-      res.writeHead(200, {
-        "Content-Type": "image/png",
-        "Content-Length": img.length
-      });
-  
-      res.end(img);
+        res.end(img);
     });
 };
 

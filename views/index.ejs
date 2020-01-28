@@ -96,12 +96,20 @@ function addUrl(){
 			if(json.status == 200 ){
 				alert(json.text);
 				$('#disport').hide();
-				let htmlSet = `<div class="card" style="margin-top: 1em; margin-bottom: 1em;">
-								<div class="card-body">
-									<h4>${json.urltype}://${json.serviceUrl}/${json.return_url} </h4>
-									이전 URL 주소는 : <b> ${json.url} </b> 입니다.
-								</div>
-							</div>`;
+				let htmlSet = `
+				<div class="card mb-3">
+					<div class="row no-gutters">
+						<div class="col-md-2">
+						<img src="${json.urltype}://${json.serviceUrl}/image/${json.return_url}" class="card-img" alt="...">
+						</div>
+						<div class="col-md-10">
+						<div class="card-body">
+							<h4>${json.urltype}://${json.serviceUrl}/${json.return_url} </h4>
+							<p class="card-text">이전 URL 주소는 : <b> ${json.url} </b> 입니다.</p>
+						</div>
+						</div>
+					</div>
+				</div>`;
 				
 				$('#disport').after(htmlSet);
 			}
