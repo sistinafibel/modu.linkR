@@ -16,6 +16,7 @@ main.index = (req,res,next) => {
 };
 
 main.test =  (req,res,net) => {
+    console.log("test-----")
     res.render('time' , {serviceUrl : "https://naver.com"});
 };
 
@@ -31,7 +32,13 @@ main.url = async (req,res,next)  => {
         let getUrlInf = await mainDao.getUrlInf(sqlArray);
         if(commons.isEmpty(getUrlInf)){
             res.render('black');
-            return 0;
+            return;
+        }
+        console.log(getUrlInf[0].etcset);
+        console.log(getUrlInf);
+        if(Number(getUrlInf[0].etcset) == 2){
+            res.render('time' , {serviceUrl : getUrlInf[0].url});
+            return;
         }
         res.statusCode = 302;
         res.setHeader('Location', getUrlInf[0].url);

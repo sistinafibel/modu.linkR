@@ -4,7 +4,7 @@ let mainDao = {};
 
 mainDao.getUrlInf = function(param){
     return new Promise(function (resolve, reject){
-        let sql = "SELECT url, return_url FROM urllist WHERE 1=1 AND return_url = ?";
+        let sql = "SELECT url, return_url, etcset FROM urllist WHERE 1=1 AND return_url = ?";
         let sqlValue = param;
         
         pool.getConnection(function(err, connection) {
