@@ -1,0 +1,128 @@
+<% include ./inc/head %>
+
+<!-- 중간 콘텐츠 시작-->
+<div class="container">
+	<div class="card" style="margin-top: 2em;">
+		<div class="card-body">
+			<h4>단축링크 생성하기</h4>
+			<form id="linkForm" name="linkForm">
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" placeholder="ex) http://naver.com" style="font-size: 1em;" id="userUrl" name="userUrl">
+					<div class="input-group-append">
+						<button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="addUrl();">등록</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col sm-6 col-md-3 ">
+						<div class="form-group">
+							<label for="exampleFormControlSelect1">SSL 설정</label>
+							<select class="form-control" id="sslSet" name="sslSet">
+								<option value="http">Http</option>
+								<option value="https">Https</option>
+							</select>
+						</div>
+					</div>
+					<div class="col sm-6 col-md-3 ">
+						<div class="form-group">
+							<label for="exampleFormControlSelect1">도메인</label>
+							<select class="form-control" id="domainSet" name="domainSet">
+								<option value="modu">modu.link</option>
+							</select>
+						</div>
+					</div>
+					<div class=" sm-6 col-md-3 ">
+						<div class="form-group">
+							<label for="exampleFormControlSelect1">기타설정</label>
+							<select class="form-control" id="etcSet" name="etcSet">
+								<option value="1">링크이동</option>
+								<option value="2">5초뒤 이동</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="card" >
+		<div class="card-body">
+			간단하게 만드는 '모두 Link'는 아직 정식 서비스가 아닌 프로토 타입으로 개발된 서비스입니다<br>
+			<b>상황에 따라 서비스가 중지되거나, 데이터가 유실 될 수 있다는 점에서 주의해서 이용해주세요.</b> <br><br>
+			서비스에 궁금한점이 생겼나요?
+			<ul>
+				<li>[Github] <a href="https://github.com/sistinafibel/modu.link">https://github.com/sistinafibel/modu.link</a></li>
+				<li>[기능 추가 / 버그] <a href="https://github.com/sistinafibel/modu.link/issues">https://github.com/sistinafibel/modu.link/issues</a></li>
+				<li>[개발자 이메일] sistinafibel@naver.com</li>
+			</ul>
+		</div>
+	</div>
+	<hr>
+	
+	
+	<div class="card" style="margin-top: 1em; margin-bottom: 1em;" id="disport">
+		<div class="card-body">
+			<h4>링크 관리</h4>
+			아직 아무 링크도 생성되지 않았어요.
+		</div>
+	</div>
+	
+	<!----->
+</div>
+
+<!-- 중간 콘텐츠 종료-->
+
+<script>
+
+$(document).ready(function(){
+       $("#userUrl").keypress(function (key) {
+        if (key.which == 13){
+			addUrl();
+			return false;
+        }
+    });
+});
+
+
+function addUrl(){
+	let queryString = $("#linkForm").serialize();
+	$.ajax({
+		type : "post",
+		url : '/addUrlGeneration',
+		data : queryString,
+		dataType : 'json',
+		error :  function(xhr, status, error){
+			console.log(status);
+		},
+		success : function(json){
+			if(json.status == 200 ){
+				alert(json.text);
+				$('#disport').hide();
+				let htmlSet = `
+				<div class="card mb-3">
+					<div class="row no-gutters">
+						<div class="col-md-2">
+						<img src="http://${json.serviceUrl}/image/${json.return_url}" class="card-img" alt="qr">
+						</div>
+						<div class="col-md-10">
+						<div class="card-body">
+							<h4>${json.urltype}://${json.serviceUrl}/${json.return_url} </h4>
+							<p>이전 URL 주소는 : <b> ${json.url} </b> 입니다.</p>
+						</div>
+						</div>
+					</div>
+				</div>`;
+				
+				$('#disport').after(htmlSet);
+			}
+			else{
+				alert(json.text);
+				return 0;
+			}
+		}
+	})
+}
+
+
+</script>
+
+
+<% include ./inc/footer %>
