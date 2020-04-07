@@ -1,0 +1,61 @@
+
+<!doctype html>
+<html lang="kr">
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="">
+	<meta http-equiv="refresh" content="5;URL='<%=serviceUrl%>'">
+
+	
+	<title>모두 쓰는 단축URL - modu.link</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="/commons/css/bootstrap.css" rel="stylesheet">
+
+	<!--custon CSS-->
+	<link href="/commons/css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<div class="container">
+		<a class="navbar-brand jeju" href="#">모두Link</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
+</nav>
+
+<div class="page-content py-5 board-bg">
+	
+	<div class="container">
+		<h3 style="padding-bottom: 15px;">페이지 이동을 하고 있습니다.</h3>
+		
+		<!--PC에서 보이는 부분-->
+		<div class="board-bg-white" style="padding: 1em 1em; border-radius:.3rem; margin-bottom: 1em;     background-color: white;">
+			<div style="font-size: 25px;"><i class="fas fa-ban"></i> <b><%=serviceUrl%>로 이동중입니다.</b></div>
+			<hr>
+			<div>
+				이동하는 페이지 주소가 맞는지 확인해주세요.<br>
+				<span id="sitetime">5</span>초뒤 이동합니다.
+			</div>
+		</div>
+	</div>
+
+</div><!--//page-content-->   
+
+
+<script>
+
+let timeOut = setInterval(() =>{
+	let timeSeconds = document.getElementById('sitetime').innerHTML = Number(document.getElementById('sitetime').textContent) - 1;
+	if(timeSeconds <= 0){
+		clearInterval(timeOut);
+	}
+} , 1000);
+
+
+</script>

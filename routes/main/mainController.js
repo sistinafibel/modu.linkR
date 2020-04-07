@@ -1,6 +1,7 @@
 const commons = require(__base+'routes/lib/commons');
 const mainDao = require(__base+'routes/main/impl/mainDao'); //mainDao
 const QRCode = require('qrcode');
+const jwt = require('jsonwebtoken');
 
 
 require('dotenv').config();
@@ -19,28 +20,39 @@ main.index = (req,res,next) => {
 
 main.test = async (req,res,next) => {
 
-    let text = "https://naver.com";
+    //const user = User.findOne({ where: { email: "email2" } })
+    //console.log("-----" + user);
 
-    QRCode.toFile(text,{type:'terminal'}, function (err, url) {
-        console.log(url)
+    const token = jwt.sign({
+        user_id: "id",
+        email: "email",
+        nick: "닉네임"
+    }, "testpassword", {
+        expiresIn: '15m', // 유효기간 15분 => 15분 이후 토큰이 재발급 됨
+        issuer: 'nodebird',
+    });
+    
+    return res.status(200).json({
+        resultCode: 200,
+        message: "토큰 발행, 로그인 성공",
+        token, // 발행된 jwt 토큰
     })
+	
     res.render('time' , {serviceUrl : "https://naver.com"});
-};
-
+}
 
 main.image = async (req, res) => {
-    const inputText = `https://naver.com`;
+    let userUrl = `https://${process.env.SERVER_URL}/` + encodeURI(req.params.url);
+    QRCode.toDataURL(userUrl, (err, url) => {
+        const data = url.replace(/.*,/, "");
+        const img = new Buffer(data, "base64");
   
-    QRCode.toDataURL(inputText, (err, url) => {
-      const data = url.replace(/.*,/, "");
-      const img = new Buffer(data, "base64");
+        res.writeHead(200, {
+            "Content-Type": "image/png",
+            "Content-Length": img.length
+        });
   
-      res.writeHead(200, {
-        "Content-Type": "image/png",
-        "Content-Length": img.length
-      });
-  
-      res.end(img);
+        res.end(img);
     });
 };
 
