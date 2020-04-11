@@ -4,8 +4,7 @@ class IndexController {
 
   public index = (req: Request, res: Response, next: NextFunction) => {
     try {
-      res.render('index' , {serviceUrl : process.env.SERVER_URL});   
-      //res.sendStatus(200);
+      res.render('index' , {serviceUrl : process.env.SERVER_URL});
     } catch (error) {
       next(error);
     }

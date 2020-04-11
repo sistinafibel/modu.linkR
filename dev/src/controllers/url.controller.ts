@@ -5,7 +5,7 @@ import { randomId , isEmpty } from '../utils/util';
 class UrlController {
     public urlService = new urlService();
 
-    public url = async (req: Request, res: Response, next: NextFunction) => {
+    public getUrl = async (req: Request, res: Response, next: NextFunction) => {
         console.log("tsetetset");
         
         try {
@@ -25,9 +25,17 @@ class UrlController {
             res.statusCode = 302;
             res.setHeader('Location', getUrlInf[0].url);
             res.end();
-
-
         } catch (error) {
+            next(error);
+        }
+    }
+
+    public addUrl = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            let sqlArray = encodeURI(req.params.url);
+            let getUrlInf = await this.urlService.getUrlInf(sqlArray);
+            
+        } catch (error){
             next(error);
         }
     }
