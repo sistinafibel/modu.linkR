@@ -86,7 +86,7 @@ function addUrl(){
 	let queryString = $("#linkForm").serialize();
 	$.ajax({
 		type : "post",
-		url : '/addUrlGeneration',
+		url : '/add',
 		data : queryString,
 		dataType : 'json',
 		error :  function(xhr, status, error){

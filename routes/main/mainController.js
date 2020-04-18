@@ -132,7 +132,7 @@ main.addUrlGeneration = async (req,res,next)  => {
 
         await mainDao.addUrlInf(sqlValue);
 
-        let jsonRrturn = {
+        let jsonReturn = {
             status : "200",
             text : "정상적으로 생성되었습니다.",
             url : userUrl,
@@ -143,7 +143,7 @@ main.addUrlGeneration = async (req,res,next)  => {
             serviceUrl : process.env.SERVER_URL
         }
 
-        res.json(jsonRrturn);
+        res.json(jsonReturn);
     }catch (error) {
         next(error);
     }

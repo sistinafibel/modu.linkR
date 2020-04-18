@@ -14,21 +14,53 @@ class UrlService {
   }
 
   public async getUrlInf(param: string): Promise<any> {
-   
-    let sql = "SELECT url, return_url, etcset FROM urllist WHERE 1=1 AND return_url = ?";
+    console.log("테스트");
+    if(param == null){
+      return;
+    }
+
+    let sql = `
+      SELECT url, return_url, etcset 
+      FROM urllist 
+      WHERE return_url = ?`;
     let sqlValue = param;
     
     pool.getConnection(function(err : any, connection : any) {
-        if (err) {return (new Error(err));}
-        connection.query(sql, [sqlValue], function(err : any , result :any) {
-            if (err) { return(new Error(err));} 
-            else {
-                return result;
-            }
-        });
-        connection.release();
+      if (err) {return (new Error(err));}
+      connection.query(sql, [sqlValue], function(err : any , result :any) {
+        if (err) { return(new Error(err));} 
+        else {
+          return result;
+        }
+      });
+      connection.release();
     });
   }
+
+  public async addUrl(param: string): Promise<any> {
+
+    if(param == null){
+      return;
+    }
+
+    console.log("addUrlGeneration");
+    console.log(param);
+    
+    let sql = `INSERT INTO urllist SET ?`;
+    let sqlValue = param;
+    console.log(sqlValue);
+    pool.getConnection(function(err : any, connection : any) {
+      if (err) {return (new Error(err));}
+      connection.query(sql, [sqlValue], function(err : any , result :any) {
+        if (err) { return(new Error(err));} 
+        else {
+          return result;
+        }
+      });
+      connection.release();
+    });
+  }
+
 }
 
 export default UrlService;
