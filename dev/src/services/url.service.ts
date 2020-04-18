@@ -14,17 +14,13 @@ class UrlService {
   }
 
   public async getUrlInf(param: string): Promise<any> {
-
     console.log("테스트");
     if(param == null){
       return;
     }
 
     let sql = `
-      SELECT 
-        url, 
-        return_url, 
-        etcset 
+      SELECT url, return_url, etcset 
       FROM urllist 
       WHERE return_url = ?`;
     let sqlValue = param;
@@ -34,7 +30,7 @@ class UrlService {
       connection.query(sql, [sqlValue], function(err : any , result :any) {
         if (err) { return(new Error(err));} 
         else {
-            return result;
+          return result;
         }
       });
       connection.release();
@@ -43,7 +39,6 @@ class UrlService {
 
   public async addUrl(param: string): Promise<any> {
 
-    console.log("테스트");
     if(param == null){
       return;
     }
@@ -51,15 +46,15 @@ class UrlService {
     console.log("addUrlGeneration");
     console.log(param);
     
-    let sql = `INSERT INTO urllist SET ? `;
+    let sql = `INSERT INTO urllist SET ?`;
     let sqlValue = param;
-    
+    console.log(sqlValue);
     pool.getConnection(function(err : any, connection : any) {
       if (err) {return (new Error(err));}
       connection.query(sql, [sqlValue], function(err : any , result :any) {
         if (err) { return(new Error(err));} 
         else {
-            return result;
+          return result;
         }
       });
       connection.release();
