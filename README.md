@@ -1,6 +1,9 @@
 
 
 # modu.link
+![b1](https://img.shields.io/github/license/sistinafibel/modu.link?style=flat-square)
+![b2](https://img.shields.io/github/stars/sistinafibel/modu.link?style=flat-square)
+
 ![q111](https://user-images.githubusercontent.com/36251104/66768705-30364180-eeee-11e9-9f3b-95658dae9d9d.gif)
 <br>모든 URL을 단축URL로 만들어주는 귀여운 서비스.<br>
 기~~~~인 URL은 싫지만 그렇다고 상용 단축URL은 쓰고싶지 않은 사람에게 적극 추천합니다.
