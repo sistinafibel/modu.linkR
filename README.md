@@ -1,5 +1,7 @@
 
 
+> ### 이 프로젝트는 https://github.com/sistinafibel/modu.link 여기로 리뉴얼을 진행하고 있습니다!
+
 # modu.link
 ![b1](https://img.shields.io/github/license/sistinafibel/modu.link?style=flat-square)
 ![b2](https://img.shields.io/github/stars/sistinafibel/modu.link?style=flat-square)
